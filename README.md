@@ -7,7 +7,7 @@ This script automatically connects to a NordVPN server by randomly selecting a .
 
 1) UNIX/Linux and OpenVPN client installed
 
-2) a paid subscription to NordVPN
+2) a paid subscription to a paid VPN provider
 
 3) the username and password are stored on separate lines in /etc/openvpn/ovpn/.htpasswd
 
