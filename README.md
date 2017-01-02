@@ -9,8 +9,8 @@ This script is one several measures to protect online privacy. Other measures I 
 
 * UNIX/Linux and OpenVPN client installed
 * a paid subscription to a paid VPN provider (in the script NordVPN is used. Use the [VPN comparison chart](https://thatoneprivacysite.net/vpn-comparison-chart/) to select the provider for your needs)
-* the username and password are stored on separate lines in /etc/openvpn/ovpn/.htpasswd
-* several .ovpn files of the servers of your choice in /etc/openvpn/ovpn
+* the username and password are stored on separate lines in `/etc/openvpn/ovpn/.htpasswd`
+* several `.ovpn` files of the servers of your choice in `/etc/openvpn/ovpn`
 * a connection to the internet
 * make this script executable:
 ```
