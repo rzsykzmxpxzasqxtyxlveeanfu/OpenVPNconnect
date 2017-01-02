@@ -3,7 +3,7 @@
 # check if required .htpassword file exists and is readable
 if [ ! -r /etc/openvpn/ovpn/.htpasswd ]
 then
-     echo ERROR: File with username and password not found
+     echo ERROR: File with username and password not found or not readable
      exit 1
 fi
 
@@ -28,4 +28,4 @@ fi
 echo Going to open new OpenVPN connection to ${BASH_REMATCH[2]} server numer ${BASH_REMATCH[3]} over ${BASH_REMATCH[4]} though port ${BASH_REMATCH[5]}
 
 # open the connection
-openvpn --auth-user pass /etc/openvpn/ovpn/.htpasswd $ovpn
+openvpn --auth-user-pass /etc/openvpn/ovpn/.htpasswd $ovpn
