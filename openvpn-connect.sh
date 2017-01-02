@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# check if required .htpassword file exists
-if [ ! -f /etc/openvpn/ovpn/.htpasswd ]
+# check if required .htpassword file exists and is readable
+if [ ! -r /etc/openvpn/ovpn/.htpasswd ]
 then
      echo ERROR: File with username and password not found
      exit 1
