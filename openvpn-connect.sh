@@ -37,7 +37,7 @@ do
 done
 
 # display date/time, countrycode, server number and protocol
-echo `date '+%c'` Opening new OpenVPN connection to ${BASH_REMATCH[3]} server ${BASH_REMATCH[4]} over ${BASH_REMATCH[5]}
+echo `date '+%c'` Opening new OpenVPN connection to ${BASH_REMATCH[3]^^} server ${BASH_REMATCH[4]} over ${BASH_REMATCH[5]^^}
 
 # open the connection, prevent output messages and keep it running
 openvpn --config $ovpn &>/dev/null &disown;
