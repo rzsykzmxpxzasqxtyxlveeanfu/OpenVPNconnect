@@ -1,7 +1,10 @@
 #!/bin/sh
 
+# path to file with username and password, both on their own line
+auth='/etc/openvpn/ovpn/auth.txt'
+
 # check if required auth.txt file exists and is readable
-if [ ! -r /etc/openvpn/ovpn/auth.txt ]
+if [ ! -r $auth ]
 then
      echo ERROR: File with username and password not found or not readable
      exit 1
@@ -33,8 +36,10 @@ do
 
 done
 
-# display countrycode, server number, protocol and portnumber
-echo Going to open new OpenVPN connection to ${BASH_REMATCH[3]} server numer ${BASH_REMATCH[4]} over ${BASH_REMATCH[5]}
+# display date/time, countrycode, server number, protocol and portnumber
+echo `date '+%c'` Opening new OpenVPN connection to ${BASH_REMATCH[3]} server ${BASH_REMATCH[4]} over ${BASH_REMATCH[5]}
 
-# open the connection
-openvpn --config $ovpn
+# open the connection, prevent output messages and keep it running
+openvpn --config $ovpn &>/dev/null &disown;
+
+exit
