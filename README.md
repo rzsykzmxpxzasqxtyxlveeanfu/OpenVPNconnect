@@ -1,6 +1,6 @@
 # OpenVPNconnect
 
-By default, a VPN is conenction is opened from a client to a server and the connection remains. With this script I want to obfuscate online behaviour using the many servers VPN providers offer. This script automatically, periodically connects to a VPN server by randomly selecting a .ovpn file from a directory.
+By default, a VPN is conenction is opened from a client to a server and the connection remains. With this script I want to obfuscate online behaviour using the many servers VPN providers offer. This script automatically, periodically connects to a VPN server by randomly selecting an .ovpn file from a directory.
 
 # Context
 
