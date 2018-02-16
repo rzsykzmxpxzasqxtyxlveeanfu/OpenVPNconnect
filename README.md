@@ -31,7 +31,7 @@ $ ./etc/openvpn/ovpn/openvpn-connect.sh
 ```
 $ ./etc/openvpn/ovpn/openvpn-connect.sh fi
 ```
-* use cron to reconnect twice a day (e.g. 04:07 and 14:07):
+* use cron to reconnect twice a day (e.g. 04:07 and 14:07) to one of the servers in Brazil:
 ```
 $ crontab -e 7 4,14 * * * /etc/openvpn/ovpn/openvpn-connect.sh br
 ```
