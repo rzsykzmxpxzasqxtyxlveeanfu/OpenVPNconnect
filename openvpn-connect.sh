@@ -1,32 +1,59 @@
 #!/bin/sh
 
-# path to file with username and password, both on their own line
-auth='/etc/openvpn/ovpn/auth.txt'
+# check if one arguments is given
+if [[ $# -eq 1 ]] ; then 
 
-# check if required auth.txt file exists and is readable
-if [ ! -r $auth ]
-then
-     echo ERROR: File with username and password not found or not readable
-     exit 1
-fi
+	# argument $1 should contain a two character country code (e.g.: uk, cy, hu, br, in)
 
-# auth file is passed as an argument in the .ovpn files, not in this script
-# all NordVPN .ovpn files must me edited, you can use this command:
-#       $ sed -i 's/auth-user-file/auth-user-file \/etc\/openvpn\/ovpn\/auth\.txt/g' *ovpn
+	# first, check if a ovpn file exists for the given country code 
+	
+	# empty array for country codes
+	declare -a countries
 
-# file path and naming format of NordVPN .ovpn files is:
-#   /etc/openvpn/ovpn/bg1.nordvpn.com.udp.ovpn
-#   /etc/openvpn/ovpn/au14.nordvpn.com.udp.ovpn
-#   /etc/openvpn/ovpn/de101.nordvpn.com.tcp.ovpn
-#   /etc/openvpn/ovpn/us1024.nordvpn.tcp.ovpn
-# regex pattern of file path and names:
-pattern='^(\/etc\/openvpn\/ovpn\/)(([a-z]{2})([0-9]{1,4})\.nordvpn\.com\.(udp|tcp)\.ovpn)$'
+	# read all file names
+	for f in /etc/openvpn/ovpn/*.ovpn;
+	do
+	
+		# put two first characters of the filename in array
+		countries+="${f:0:2}"
+	
+	done
+
+	# remove duplicates from array and sort it
+	countries="${countries[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '
+
+	# check if lowercase country code entered by user is in array
+	if [[ -n "${countries[$1,,]}" ]]
+	then
+	
+		# use country code in the pattern to search for ovpn files
+		pattern='^(\/etc\/openvpn\/ovpn\/)(($1)([0-9]{1,4})\.nordvpn\.com\.(udp|tcp)\.ovpn)$'
+
+		# use country code to select one random ovpv file
+		ovpn=$(ls /etc/openvpn/ovpn/$1*.ovpn | shuf -n 1)
+	
+	else
+	
+		# no file with country code found
+		# print list of available countries
+		echo "No VPN server(s) in country $1. Retry with one of these:"
+		printf '%s ' "${countries[@]}"
+		echo "In the meantime: will connnect to another, random, VPN server"
+	
+	done
+
+else
+
+	# regex pattern for ovpn files
+	pattern='^(\/etc\/openvpn\/ovpn\/)(([a-z]{2})([0-9]{1,4})\.nordvpn\.com\.(udp|tcp)\.ovpn)$'
+
+	# command to select random file
+	ovpn=$(ls /etc/openvpn/ovpn/*.ovpn | shuf -n 1)
+
+done
 
 while :
 do
-
-     # select a random .ovpn file
-     ovpn=$(ls /etc/openvpn/ovpn/*.ovpn | shuf -n 1)
 
      if [[ $ovpn =~ $pattern ]]
      then
