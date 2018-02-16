@@ -21,8 +21,17 @@ This script is one several measures to protect online privacy. Other measures I 
 ```
 $ chmod +x /etc/openvpn/ovpn/openvpn-connect.sh
 ```
+# Usage
+
+* run:
+```
+$ ./etc/openvpn/ovpn/openvpn-connect.sh
+```
+* optional argument: two character country code (e.g.: ch, ru, in, uk, ca):
+```
+$ ./etc/openvpn/ovpn/openvpn-connect.sh fi
+```
 * use cron to reconnect twice a day (e.g. 04:07 and 14:07):
 ```
-$ crontab -e 7 4,14 * * * /etc/openvpn/ovpn/openvpn-connect.sh
+$ crontab -e 7 4,14 * * * /etc/openvpn/ovpn/openvpn-connect.sh br
 ```
-* TODO: root privileges?
