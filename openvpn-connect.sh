@@ -10,8 +10,8 @@ if [[ $# -eq 1 ]] ; then
 	# empty array for country codes
 	declare -a countries
 
-	# read all file names
-	for f in /etc/openvpn/ovpn/*.ovpn;
+	# read all file names starting with the country code
+	for f in /etc/openvpn/ovpn/$1*.ovpn;
 	do
 	
 		# put two first characters of the filename in array
@@ -23,7 +23,7 @@ if [[ $# -eq 1 ]] ; then
 	countries="${countries[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '
 
 	# check if lowercase country code entered by user is in array
-	if [[ -n "${countries[$1,,]}" ]]
+	if [[ -n "${countries[$1]}" ]]
 	then
 	
 		# use country code in the pattern to search for ovpn files
