@@ -40,7 +40,7 @@ if [[ $# -eq 1 ]] ; then
 		printf '%s ' "${countries[@]}"
 		echo "In the meantime: will connnect to another, random, VPN server"
 	
-	done
+	fi
 
 else
 
@@ -50,7 +50,7 @@ else
 	# command to select random file
 	ovpn=$(ls /etc/openvpn/ovpn/*.ovpn | shuf -n 1)
 
-done
+fi
 
 while :
 do
